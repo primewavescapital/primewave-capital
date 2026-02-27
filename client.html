@@ -3,118 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PrimeWave Capital | Investor Portal</title>
+<title>PrimeWave Capital | Client Portal</title>
 <style>
-    * {margin:0; padding:0; box-sizing:border-box; font-family:-apple-system, BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
-    body {background:linear-gradient(145deg,#f8faff 0%,#f0f5fe 100%); min-height:100vh; padding:2rem;}
-    .container {max-width:900px; margin:0 auto;}
-    .header {background:rgba(255,255,255,0.9); backdrop-filter:blur(10px); border-radius:24px; padding:1.5rem 2rem; margin-bottom:2rem; display:flex; justify-content:space-between; align-items:center; box-shadow:0 20px 40px rgba(0,20,60,0.08); border:1px solid rgba(255,255,255,0.5);}
-    .header h1 {color:#1e2f4f; font-size:2rem;}
-    .logout-btn {background:#fee2e2; color:#dc2626; padding:0.6rem 1.5rem; border-radius:40px; text-decoration:none; font-weight:500; border:1px solid #fecaca; transition:0.3s;}
-    .logout-btn:hover {background:#dc2626; color:white;}
-    .card {background:white; border-radius:24px; padding:2rem; border:1px solid rgba(230,240,255,0.8); margin-bottom:2rem; box-shadow:0 15px 30px rgba(0,20,40,0.06);}
-    .card h2 {color:#1e2f4f; margin-bottom:1rem;}
-    .stat {display:flex; justify-content:space-between; margin-bottom:0.5rem;}
-    .stat span {font-weight:600;}
-    .withdrawal-form {margin-top:1rem;}
-    .withdrawal-form input, .withdrawal-form textarea {width:100%; padding:0.8rem 1rem; margin-bottom:0.8rem; border-radius:12px; border:1px solid #eef3fc; font-size:0.95rem; outline:none;}
-    .withdrawal-form input:focus, .withdrawal-form textarea:focus {border-color:#1e2f4f;}
-    .withdrawal-btn {width:100%; padding:1rem; background:#1e2f4f; color:white; border:none; border-radius:12px; font-weight:600; cursor:pointer; font-size:1rem;}
-    .withdrawal-btn:hover {background:#2d4373;}
-    .history-table {width:100%; border-collapse:collapse; margin-top:1rem;}
-    .history-table th, .history-table td {padding:0.8rem; text-align:left; border-bottom:1px solid #f0f5fd;}
-    .history-table th {color:#5f7d9c; font-weight:500; font-size:0.85rem;}
-    .footer {text-align:center; color:#5f7d9c; font-size:0.9rem; margin-top:2rem;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;}
+body{background:linear-gradient(145deg,#f8faff 0%,#f0f5fe 100%);min-height:100vh;padding:2rem;}
+.container{max-width:1000px;margin:0 auto;}
+.header{background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border-radius:24px;padding:1.5rem 2rem;margin-bottom:2rem;display:flex;justify-content:space-between;align-items:center;box-shadow:0 20px 40px rgba(0,20,60,0.08);}
+.header h1{color:#1e2f4f;font-size:2rem;font-weight:600;}
+.logout-btn{background:#fee2e2;color:#dc2626;padding:0.6rem 1.5rem;border-radius:40px;text-decoration:none;font-weight:500;border:1px solid #fecaca;transition:all 0.3s;}
+.logout-btn:hover{background:#dc2626;color:white;}
+.login-card,.dashboard-card{background:white;border-radius:24px;padding:2rem;border:1px solid rgba(230,240,255,0.8);box-shadow:0 15px 30px rgba(0,20,40,0.06);margin-bottom:2rem;}
+.form-group{margin-bottom:1rem;}
+.form-group label{display:block;color:#5f7d9c;font-size:0.85rem;margin-bottom:0.3rem;}
+.form-group input{width:100%;padding:0.8rem 1rem;border:2px solid #eef3fc;border-radius:12px;font-size:0.95rem;outline:none;}
+.form-group input:focus{border-color:#1e2f4f;}
+.add-btn{width:100%;padding:1rem;background:#1e2f4f;color:white;border:none;border-radius:12px;font-weight:600;font-size:1rem;cursor:pointer;margin-top:0.5rem;}
+.add-btn:hover{background:#2d4373;}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:2rem;}
+.stat-card{background:white;border-radius:20px;padding:1.8rem;box-shadow:0 15px 30px rgba(0,20,40,0.06);border:1px solid rgba(230,240,255,0.8);}
+.stat-label{color:#5f7d9c;font-size:0.9rem;text-transform:uppercase;margin-bottom:0.5rem;}
+.stat-number{color:#1e2f4f;font-size:2rem;font-weight:700;margin-bottom:0.3rem;}
+.stat-trend{color:#28a745;font-size:0.95rem;}
+.withdrawal-item{display:flex;justify-content:space-between;align-items:center;padding:1rem;background:#f8fcff;border-radius:12px;margin-bottom:0.8rem;}
+.withdrawal-amount{font-weight:700;color:#1e2f4f;font-size:1.1rem;}
+.footer{text-align:center;color:#5f7d9c;font-size:0.9rem;margin-top:2rem;}
 </style>
 </head>
 <body>
 <div class="container">
+  
+<!-- Header -->
+<div class="header">
+    <h1>💼 Client Portal</h1>
+    <a href="#" class="logout-btn" id="logoutBtn" style="display:none;" onclick="logout()">Logout</a>
+</div>
 
-    <!-- Header -->
-    <div class="header">
-        <h1>📈 Investor Portal</h1>
-        <a href="#" class="logout-btn" onclick="logout()">Logout</a>
+<!-- Login Card -->
+<div class="login-card" id="loginCard">
+  <h2>Login to Your Account</h2>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" id="loginUsername" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="loginPassword" placeholder="Enter password">
+  </div>
+  <button class="add-btn" onclick="login()">Login</button>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" style="display:none;">
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Initial Investment</div>
+      <div class="stat-number" id="statInitial">R0</div>
     </div>
-
-    <!-- Welcome Card -->
-    <div class="card" id="welcomeCard">
-        <h2>Welcome, <span id="investorName"></span>!</h2>
-        <div class="stat"><span>Current Balance:</span> <span id="currentBalance">R0</span></div>
-        <div class="stat"><span>Profit:</span> <span id="profitAmount">R0</span></div>
-        <div class="stat"><span>Initial Investment:</span> <span id="initialInvestment">R0</span></div>
+    <div class="stat-card">
+      <div class="stat-label">Current Balance</div>
+      <div class="stat-number" id="statBalance">R0</div>
     </div>
-
-    <!-- Withdrawal Request -->
-    <div class="card">
-        <h2>Request Withdrawal</h2>
-        <form class="withdrawal-form" onsubmit="requestWithdrawal(event)">
-            <input type="number" id="withdrawAmount" placeholder="Amount to withdraw" required>
-            <textarea id="withdrawReason" rows="3" placeholder="Reason for withdrawal (e.g., Education, Business)"></textarea>
-            <button type="submit" class="withdrawal-btn">Submit Request →</button>
-        </form>
+    <div class="stat-card">
+      <div class="stat-label">Profit</div>
+      <div class="stat-number" id="statProfit">R0</div>
     </div>
+  </div>
 
-    <!-- Withdrawal History -->
-    <div class="card">
-        <h2>Withdrawal History</h2>
-        <table class="history-table" id="withdrawalHistory">
-            <thead><tr><th>Date</th><th>Amount</th><th>Reason</th><th>Status</th></tr></thead>
-            <tbody></tbody>
-        </table>
+  <!-- Request Withdrawal -->
+  <div class="dashboard-card">
+    <h3>Request Withdrawal</h3>
+    <div class="form-group">
+      <label>Amount</label>
+      <input type="number" id="withdrawAmount" placeholder="Enter amount">
     </div>
+    <div class="form-group">
+      <label>Reason</label>
+      <input type="text" id="withdrawReason" placeholder="Reason for withdrawal">
+    </div>
+    <button class="add-btn" onclick="requestWithdrawal()">Submit Request</button>
+  </div>
 
-    <div class="footer">PrimeWave Capital © 2025 | 📍 Durban, South Africa | 📞 +27 62 550 3303</div>
+  <!-- Withdrawal History -->
+  <div class="dashboard-card">
+    <h3>Withdrawal History</h3>
+    <div id="withdrawHistory"></div>
+  </div>
+</div>
+
+<div class="footer">PrimeWave Capital © 2025 | 📍 Durban, South Africa | 📞 +27 62 550 3303</div>
 </div>
 
 <script>
-let investors = [
-    { id:'INV001', name:'Thabo M.', initial:125000, current:142800, withdrawals:[] },
-    { id:'INV002', name:'Nomsa K.', initial:250000, current:289500, withdrawals:[] },
-    { id:'INV003', name:'David R.', initial:50000, current:61200, withdrawals:[] }
-];
+// --- LocalStorage reference ---
+let investors = JSON.parse(localStorage.getItem('investors')) || [];
+let pendingWithdrawals = JSON.parse(localStorage.getItem('pendingWithdrawals')) || [];
+let currentUser = JSON.parse(localStorage.getItem('currentClient')) || null;
 
-let pendingWithdrawals = [];
-
-function loadInvestorData(){
-    const investorId = localStorage.getItem('currentInvestor');
-    if(!investorId){ alert('No investor logged in'); window.location.href='index.html'; return; }
-    const investor = investors.find(i=>i.id===investorId);
-    if(!investor){ alert('Investor not found'); window.location.href='index.html'; return; }
-    document.getElementById('investorName').innerText = investor.name;
-    document.getElementById('currentBalance').innerText = 'R'+investor.current.toLocaleString();
-    document.getElementById('profitAmount').innerText = (investor.current-investor.initial)>=0?'+R'+(investor.current-investor.initial).toLocaleString():'-R'+Math.abs(investor.current-investor.initial).toLocaleString();
-    document.getElementById('initialInvestment').innerText = 'R'+investor.initial.toLocaleString();
-    loadWithdrawalHistory();
+// --- Login ---
+function login(){
+  let username = document.getElementById('loginUsername').value.trim();
+  let password = document.getElementById('loginPassword').value.trim();
+  let user = investors.find(i=>i.username===username && i.password===password);
+  if(user){currentUser = user; localStorage.setItem('currentClient',JSON.stringify(currentUser)); showDashboard();}
+  else{alert('Invalid credentials');}
 }
 
-function loadWithdrawalHistory(){
-    const investorId = localStorage.getItem('currentInvestor');
-    const investor = investors.find(i=>i.id===investorId);
-    const tbody = document.querySelector('#withdrawalHistory tbody');
-    tbody.innerHTML='';
-    investor.withdrawals.forEach(w=>{
-        tbody.innerHTML+=`<tr><td>${w.date}</td><td>R${w.amount.toLocaleString()}</td><td>${w.reason}</td><td>${w.status}</td></tr>`;
-    });
+// --- Logout ---
+function logout(){
+  localStorage.removeItem('currentClient');
+  currentUser=null;
+  document.getElementById('dashboard').style.display='none';
+  document.getElementById('loginCard').style.display='block';
+  document.getElementById('logoutBtn').style.display='none';
 }
 
-function requestWithdrawal(e){
-    e.preventDefault();
-    const amount=parseFloat(document.getElementById('withdrawAmount').value);
-    const reason=document.getElementById('withdrawReason').value || 'No reason';
-    const investorId = localStorage.getItem('currentInvestor');
-    const investor = investors.find(i=>i.id===investorId);
-    if(amount>investor.current){ alert('Insufficient balance'); return; }
-    const today = new Date().toISOString().split('T')[0];
-    investor.withdrawals.push({date:today, amount, reason, status:'Pending'});
-    pendingWithdrawals.push({id:'WD'+(pendingWithdrawals.length+1).padStart(3,'0'), investorId, name:investor.name, amount, date:today, reason});
-    document.getElementById('withdrawAmount').value=''; document.getElementById('withdrawReason').value='';
-    loadInvestorData();
-    alert('Withdrawal request submitted!');
+// --- Show Dashboard ---
+function showDashboard(){
+  document.getElementById('loginCard').style.display='none';
+  document.getElementById('dashboard').style.display='block';
+  document.getElementById('logoutBtn').style.display='inline-block';
+  loadDashboard();
 }
 
-function logout(){ localStorage.removeItem('currentInvestor'); window.location.href='index.html'; }
+// --- Load Dashboard Data ---
+function loadDashboard(){
+  if(!currentUser) return;
+  document.getElementById('statInitial').innerText='R'+currentUser.initial.toLocaleString();
+  document.getElementById('statBalance').innerText='R'+currentUser.current.toLocaleString();
+  let profit = currentUser.current - currentUser.initial;
+  document.getElementById('statProfit').innerText=(profit>=0?'+R':'-R')+Math.abs(profit).toLocaleString();
+  loadHistory();
+}
 
-loadInvestorData();
+// --- Withdrawal Request ---
+function requestWithdrawal(){
+  let amount = parseFloat(document.getElementById('withdrawAmount').value);
+  let reason = document.getElementById('withdrawReason').value.trim();
+  if(!amount || !reason){alert('Fill all fields'); return;}
+  if(amount>currentUser.current){alert('Cannot withdraw more than balance'); return;}
+  let wdId = 'WD'+Date.now();
+  let date = new Date().toLocaleDateString();
+  pendingWithdrawals.push({id:wdId,investorId:currentUser.id,name:currentUser.name,amount,date,reason});
+  currentUser.history.push({date,amount,reason,status:'Pending'});
+  updateUserData();
+  alert('✅ Withdrawal request submitted');
+  document.getElementById('withdrawAmount').value='';
+  document.getElementById('withdrawReason').value='';
+  loadHistory();
+}
+
+// --- Load Withdrawal History ---
+function loadHistory(){
+  let historyDiv = document.getElementById('withdrawHistory');
+  historyDiv.innerHTML='';
+  currentUser.history.slice().reverse().forEach(h=>{
+    historyDiv.innerHTML+=`<div class="withdrawal-item">
+      <div><h4>${h.reason}</h4><p>${h.date}</p></div>
+      <div class="withdrawal-amount">${h.status==='Approved'?`R${h.amount.toLocaleString()}`:'-'}</div>
+      <div style="color:${h.status==='Approved'?'#28a745':h.status==='Declined'?'#dc3545':'#1e2f4f'};font-weight:600">${h.status}</div>
+    </div>`;
+  });
+}
+
+// --- Update LocalStorage ---
+function updateUserData(){
+  investors = investors.map(i=>i.id===currentUser.id?currentUser:i);
+  localStorage.setItem('investors',JSON.stringify(investors));
+  localStorage.setItem('pendingWithdrawals',JSON.stringify(pendingWithdrawals));
+  localStorage.setItem('currentClient',JSON.stringify(currentUser));
+  loadDashboard();
+}
+
+// --- Initialize ---
+if(currentUser) showDashboard();
 </script>
 </body>
 </html>
