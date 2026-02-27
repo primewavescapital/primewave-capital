@@ -1,47 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Investor Portal</title>
-<link rel="stylesheet" href="portal-style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeWave Capital - Client Portal</title>
+    <link rel="stylesheet" href="portal-style.css">
 </head>
 <body>
+
+<!-- Login Screen -->
 <div class="login-box" id="loginScreen">
-  <h2>🔐 Investor Login</h2>
-  <input type="text" id="investorId" placeholder="Enter ID e.g. INV001">
-  <button onclick="login()">Access Dashboard</button>
+    <h2>🔐 Investor Login</h2>
+    <p class="login-subtitle">Enter your Investor ID and Password</p>
+
+    <input type="text" id="investorId" class="control-input" placeholder="Investor ID (e.g., INV001)">
+    <input type="password" id="investorPassword" class="control-input" placeholder="Password">
+    <button class="btn btn-primary" onclick="login()">Access Portfolio</button>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="index.html" style="color: #667eea;">← Back to Home</a>
+    </div>
 </div>
 
-<div class="client-container" id="dashboardScreen" style="display:none;">
-  <h2>Welcome, <span id="clientName"></span></h2>
-  <p>Total Invested: <span id="totalInvested"></span></p>
-  <p>Current Value: <span id="currentValue"></span></p>
-  <p>Total Profit: <span id="totalProfit"></span></p>
-  <button onclick="logout()">Logout</button>
+<!-- Dashboard (Hidden Initially) -->
+<div class="client-container" id="dashboardScreen" style="display: none;">
+    <!-- Header -->
+    <div class="dashboard-header">
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <h1>Welcome back, <span id="clientName"></span> 👋</h1>
+                <p>Your portfolio summary • Last updated: <span id="lastUpdate">Just now</span></p>
+            </div>
+            <button class="btn btn-danger" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>Total Invested</h3>
+            <div class="value" id="totalInvested">R0</div>
+        </div>
+        <div class="stat-card">
+            <h3>Current Value</h3>
+            <div class="value" id="currentValue">R0</div>
+        </div>
+        <div class="stat-card">
+            <h3>Total Profit/Loss</h3>
+            <div class="value" id="totalProfit">R0</div>
+        </div>
+        <div class="stat-card">
+            <h3>Return %</h3>
+            <div class="value" id="returnPercentage">0%</div>
+        </div>
+    </div>
+
+    <!-- Recent Transactions -->
+    <div class="transactions-card">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+            <h3>📋 Recent Activity</h3>
+            <button class="btn btn-primary" onclick="refreshClientData()">🔄 Refresh</button>
+        </div>
+        <div id="transactionsList">
+            <p style="text-align:center; color:#999;">No recent transactions</p>
+        </div>
+    </div>
 </div>
 
 <script src="portal-data.js"></script>
 <script>
 let currentInvestor = null;
+
+// ---------- Login ----------
 function login(){
-  const id = document.getElementById('investorId').value.trim().toUpperCase();
-  const inv = getInvestorById(id);
-  if(!inv){ alert('ID not found'); return;}
-  currentInvestor=inv;
-  document.getElementById('loginScreen').style.display='none';
-  document.getElementById('dashboardScreen').style.display='block';
-  document.getElementById('clientName').textContent=inv.name;
-  document.getElementById('totalInvested').textContent='R'+inv.initialInvestment.toLocaleString();
-  document.getElementById('currentValue').textContent='R'+inv.currentValue.toLocaleString();
-  document.getElementById('totalProfit').textContent=(calculateProfit(inv)>=0?'+':'')+'R'+calculateProfit(inv).toLocaleString();
+    const id = document.getElementById('investorId').value.trim().toUpperCase();
+    const password = document.getElementById('investorPassword').value;
+
+    if(!id || !password){
+        alert('Enter both ID and Password');
+        return;
+    }
+
+    const inv = getInvestorById(id);
+    if(inv && inv.password === password){
+        currentInvestor = inv;
+        document.getElementById('loginScreen').style.display='none';
+        document.getElementById('dashboardScreen').style.display='block';
+        loadClientData();
+    } else {
+        alert('❌ Invalid ID or Password');
+    }
 }
+
+// ---------- Load Portfolio ----------
+function loadClientData(){
+    if(!currentInvestor) return;
+
+    const profit = currentInvestor.currentValue - currentInvestor.initialInvestment;
+    const returnPct = ((profit/currentInvestor.initialInvestment)*100).toFixed(2);
+
+    document.getElementById('clientName').textContent = currentInvestor.name;
+    document.getElementById('totalInvested').textContent = 'R'+currentInvestor.initialInvestment.toLocaleString();
+    document.getElementById('currentValue').textContent = 'R'+currentInvestor.currentValue.toLocaleString();
+    document.getElementById('totalProfit').textContent = (profit>=0?'+':'')+'R'+profit.toLocaleString();
+    document.getElementById('returnPercentage').textContent = (profit>=0?'+':'')+returnPct+'%';
+    document.getElementById('returnPercentage').style.color = profit>=0?'#10b981':'#ef4444';
+
+    loadTransactions();
+}
+
+// ---------- Transactions ----------
+function loadTransactions(){
+    const transactions = getTransactionHistory(currentInvestor.id);
+    const container = document.getElementById('transactionsList');
+    if(transactions.length === 0){
+        container.innerHTML = '<p style="text-align:center; color:#999;">No recent transactions</p>';
+        return;
+    }
+    container.innerHTML = '';
+    transactions.forEach(t=>{
+        const div = document.createElement('div');
+        div.className = 'transaction-item';
+        div.innerHTML = `
+            <div style="display:flex; align-items:center; gap:15px;">
+                <span style="font-size:24px;">${t.type==='dividend'?'💵':t.type==='contribution'?'📥':'📈'}</span>
+                <div>
+                    <strong>${t.description}</strong>
+                    <p style="font-size:12px; color:#666;">${new Date(t.date).toLocaleDateString()}</p>
+                </div>
+            </div>
+            <span style="color:#10b981; font-weight:600;">R${t.amount.toLocaleString()}</span>
+        `;
+        container.appendChild(div);
+    });
+}
+
+// ---------- Refresh ----------
+function refreshClientData(){
+    if(currentInvestor){
+        const refreshed = getInvestorById(currentInvestor.id);
+        if(refreshed){
+            currentInvestor = refreshed;
+            loadClientData();
+            document.getElementById('lastUpdate').textContent='Just now';
+        }
+    }
+}
+
+// ---------- Logout ----------
 function logout(){
-  currentInvestor=null;
-  document.getElementById('loginScreen').style.display='block';
-  document.getElementById('dashboardScreen').style.display='none';
-  document.getElementById('investorId').value='';
+    currentInvestor = null;
+    document.getElementById('loginScreen').style.display='block';
+    document.getElementById('dashboardScreen').style.display='none';
+    document.getElementById('investorId').value='';
+    document.getElementById('investorPassword').value='';
 }
+
+// ---------- Enter Key ----------
+document.getElementById('investorId').addEventListener('keypress', function(e){
+    if(e.key==='Enter') login();
+});
+document.getElementById('investorPassword').addEventListener('keypress', function(e){
+    if(e.key==='Enter') login();
+});
 </script>
+
 </body>
 </html>
