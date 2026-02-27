@@ -1,31 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel</title>
-<link rel="stylesheet" href="portal-style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrimeWave Capital - Admin Panel</title>
+    <link rel="stylesheet" href="portal-style.css">
 </head>
 <body>
-<h1>Admin Panel</h1>
-<table border="1">
-<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Initial</th><th>Current</th><th>Profit</th><th>Actions</th></tr></thead>
-<tbody id="tableBody"></tbody>
-</table>
+<div class="admin-container">
+    <!-- Header -->
+    <div class="admin-header">
+        <h1>🔐 PrimeWave Capital Admin</h1>
+        <p>Manage investors, update portfolios, control everything</p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-overview" id="statsOverview">
+        <div class="stat-box">
+            <h3>Total Investors</h3>
+            <div class="number" id="totalInvestors">0</div>
+        </div>
+        <div class="stat-box">
+            <h3>Total AUM</h3>
+            <div class="number" id="totalAUM">R0</div>
+        </div>
+        <div class="stat-box">
+            <h3>Avg. Return</h3>
+            <div class="number" id="avgReturn">0%</div>
+        </div>
+    </div>
+
+    <!-- Admin Controls -->
+    <div class="admin-controls">
+        <h3>➕ Add New Investor</h3>
+        <div class="control-group">
+            <input type="text" id="newName" class="control-input" placeholder="Investor Name">
+            <input type="email" id="newEmail" class="control-input" placeholder="Email">
+            <input type="tel" id="newPhone" class="control-input" placeholder="Phone">
+            <input type="number" id="newAmount" class="control-input" placeholder="Initial Investment (R)">
+            <input type="text" id="newPassword" class="control-input" placeholder="Password">
+            <button class="btn btn-primary" onclick="addNewInvestor()">Add Investor</button>
+        </div>
+
+        <h3>📈 Bulk Updates</h3>
+        <div class="control-group">
+            <input type="number" id="bulkProfit" class="control-input" placeholder="Update all profits by %">
+            <button class="btn btn-warning" onclick="updateAllInvestorProfits()">Update All Profits</button>
+        </div>
+    </div>
+
+    <!-- Investors Table -->
+    <div class="table-container">
+        <h3>📋 All Investors</h3>
+        <table id="investorsTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Initial (R)</th>
+                    <th>Current (R)</th>
+                    <th>Profit/Loss</th>
+                    <th>Return %</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Edit Modal -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <h3>Edit Investor</h3>
+        <input type="hidden" id="editId">
+        <input type="text" id="editName" placeholder="Name">
+        <input type="email" id="editEmail" placeholder="Email">
+        <input type="tel" id="editPhone" placeholder="Phone">
+        <input type="number" id="editInitial" placeholder="Initial Investment">
+        <input type="number" id="editCurrent" placeholder="Current Value">
+        <input type="text" id="editPassword" placeholder="Password">
+        <div class="modal-buttons">
+            <button class="btn btn-primary" onclick="saveEdit()">Save</button>
+            <button class="btn btn-danger" onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+</div>
 
 <script src="portal-data.js"></script>
 <script>
-function loadInvestors(){
-  const tbody=document.getElementById('tableBody'); tbody.innerHTML='';
-  getAllInvestors().forEach(inv=>{
-    const profit=calculateProfit(inv);
-    const row=document.createElement('tr');
-    row.innerHTML=`<td>${inv.id}</td><td>${inv.name}</td><td>${inv.email}</td><td>R${inv.initialInvestment}</td><td>R${inv.currentValue}</td><td>${profit>=0?'+':'-'}R${Math.abs(profit)}</td>
-    <td><button onclick="deleteInvestor('${inv.id}'); loadInvestors();">🗑️ Delete</button></td>`;
-    tbody.appendChild(row);
-  });
-}
-loadInvestors();
+    // ---------- Load Table ----------
+    function loadInvestors() {
+        const investors = getAllInvestors();
+        const tbody = document.getElementById('tableBody');
+        tbody.innerHTML = '';
+
+        let totalAUM = 0;
+        let totalReturn = 0;
+
+        investors.forEach(inv => {
+            const profit = inv.currentValue - inv.initialInvestment;
+            const returnPct = ((profit / inv.initialInvestment) * 100).toFixed(2);
+            totalAUM += inv.currentValue;
+            totalReturn += parseFloat(returnPct);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${inv.id}</td>
+                <td>${inv.name}</td>
+                <td>${inv.email}</td>
+                <td>${inv.phone}</td>
+                <td>R${inv.initialInvestment.toLocaleString()}</td>
+                <td>R${inv.currentValue.toLocaleString()}</td>
+                <td style="color:${profit>=0?'#10b981':'#ef4444'}">${profit>=0?'+':'-'}R${Math.abs(profit).toLocaleString()}</td>
+                <td style="color:${profit>=0?'#10b981':'#ef4444'}">${profit>=0?'+':''}${returnPct}%</td>
+                <td>${inv.password}</td>
+                <td>
+                    <button class="action-btn edit-btn" onclick="openEditModal('${inv.id}')">Edit</button>
+                    <button class="action-btn delete-btn" onclick="deleteInvestorConfirm('${inv.id}')">Delete</button>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        document.getElementById('totalInvestors').textContent = investors.length;
+        document.getElementById('totalAUM').textContent = 'R'+totalAUM.toLocaleString();
+        document.getElementById('avgReturn').textContent = (totalReturn/investors.length).toFixed(2)+'%';
+    }
+
+    // ---------- Add New Investor ----------
+    function addNewInvestor() {
+        const name = document.getElementById('newName').value;
+        const email = document.getElementById('newEmail').value;
+        const phone = document.getElementById('newPhone').value;
+        const amount = parseFloat(document.getElementById('newAmount').value);
+        const password = document.getElementById('newPassword').value;
+
+        if(!name || !email || !phone || !amount){
+            alert('Fill all fields!');
+            return;
+        }
+
+        const inv = addInvestor({name,email,phone,initialInvestment:amount,password});
+        alert(`✅ Investor added!\nID: ${inv.id}\nPassword: ${inv.password}`);
+
+        // Clear inputs
+        document.getElementById('newName').value='';
+        document.getElementById('newEmail').value='';
+        document.getElementById('newPhone').value='';
+        document.getElementById('newAmount').value='';
+        document.getElementById('newPassword').value='';
+
+        loadInvestors();
+    }
+
+    // ---------- Edit ----------
+    function openEditModal(id){
+        const inv = getInvestorById(id);
+        if(!inv) return;
+        document.getElementById('editId').value = inv.id;
+        document.getElementById('editName').value = inv.name;
+        document.getElementById('editEmail').value = inv.email;
+        document.getElementById('editPhone').value = inv.phone;
+        document.getElementById('editInitial').value = inv.initialInvestment;
+        document.getElementById('editCurrent').value = inv.currentValue;
+        document.getElementById('editPassword').value = inv.password;
+
+        document.getElementById('editModal').style.display='flex';
+    }
+
+    function saveEdit(){
+        const id = document.getElementById('editId').value;
+        updateInvestor(id,{
+            name: document.getElementById('editName').value,
+            email: document.getElementById('editEmail').value,
+            phone: document.getElementById('editPhone').value,
+            initialInvestment: parseFloat(document.getElementById('editInitial').value),
+            currentValue: parseFloat(document.getElementById('editCurrent').value),
+            password: document.getElementById('editPassword').value
+        });
+        closeModal();
+        loadInvestors();
+        alert('✅ Investor updated!');
+    }
+
+    function closeModal(){
+        document.getElementById('editModal').style.display='none';
+    }
+
+    // ---------- Delete ----------
+    function deleteInvestorConfirm(id){
+        if(confirm('Are you sure?')){
+            deleteInvestor(id);
+            loadInvestors();
+        }
+    }
+
+    // ---------- Bulk Profit ----------
+    function updateAllInvestorProfits(){
+        const pct = parseFloat(document.getElementById('bulkProfit').value);
+        if(!pct){ alert('Enter %'); return;}
+        updateAllProfits(pct);
+        document.getElementById('bulkProfit').value='';
+        loadInvestors();
+        alert(`✅ All profits updated by ${pct}%`);
+    }
+
+    // Close modal on outside click
+    window.onclick = function(e){
+        if(e.target===document.getElementById('editModal')) closeModal();
+    }
+
+    // Initial load
+    loadInvestors();
 </script>
 </body>
-</html>
+                      </html>
