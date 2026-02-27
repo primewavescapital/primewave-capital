@@ -2,10 +2,19 @@
 // PORTAL DATA MANAGER - SIMULATES DATABASE
 // ============================================
 
-// Data storage (all investors)
+// -----------------------------
+// Global Data Storage
+// -----------------------------
 let investors = [];
 
-// Load data from localStorage (browser's memory)
+// -----------------------------
+// Load & Save Functions
+// -----------------------------
+
+/**
+ * Load investors from localStorage
+ * If none exists, populate default demo investors
+ */
 function loadData() {
     const saved = localStorage.getItem('primewave_investors');
     if (saved) {
@@ -59,19 +68,28 @@ function loadData() {
     return investors;
 }
 
-// Save data to localStorage
+/**
+ * Save current investors to localStorage
+ */
 function saveData() {
     localStorage.setItem('primewave_investors', JSON.stringify(investors));
 }
 
-// ========== ADMIN FUNCTIONS ==========
+// -----------------------------
+// ADMIN FUNCTIONS
+// -----------------------------
 
-// Get all investors
+/**
+ * Get all investors (ensures data is loaded)
+ */
 function getAllInvestors() {
+    loadData();
     return investors;
 }
 
-// Add new investor
+/**
+ * Add a new investor
+ */
 function addInvestor(investorData) {
     const newId = 'INV' + String(investors.length + 1).padStart(3, '0');
     const newInvestor = {
@@ -86,7 +104,9 @@ function addInvestor(investorData) {
     return newInvestor;
 }
 
-// Update investor
+/**
+ * Update an existing investor by ID
+ */
 function updateInvestor(id, updatedData) {
     const index = investors.findIndex(inv => inv.id === id);
     if (index !== -1) {
@@ -97,13 +117,17 @@ function updateInvestor(id, updatedData) {
     return false;
 }
 
-// Delete investor
+/**
+ * Delete an investor by ID
+ */
 function deleteInvestor(id) {
     investors = investors.filter(inv => inv.id !== id);
     saveData();
 }
 
-// Update profit for all investors
+/**
+ * Bulk update profits for all investors by percentage
+ */
 function updateAllProfits(percentage) {
     investors.forEach(inv => {
         inv.currentValue = inv.initialInvestment * (1 + percentage / 100);
@@ -111,27 +135,40 @@ function updateAllProfits(percentage) {
     saveData();
 }
 
-// Get investor by ID
+/**
+ * Get investor by ID (for client login)
+ */
 function getInvestorById(id) {
+    loadData();
     return investors.find(inv => inv.id === id);
 }
 
-// Calculate profit/loss
+// -----------------------------
+// CLIENT FUNCTIONS
+// -----------------------------
+
+/**
+ * Calculate profit/loss for a single investor
+ */
 function calculateProfit(investor) {
     return investor.currentValue - investor.initialInvestment;
 }
 
-// Calculate percentage return
+/**
+ * Calculate percentage return for a single investor
+ */
 function calculateReturnPercentage(investor) {
     return ((investor.currentValue - investor.initialInvestment) / investor.initialInvestment * 100).toFixed(2);
 }
 
-// Get transaction history
+/**
+ * Get simulated transaction history for a client
+ */
 function getTransactionHistory(investorId) {
     const investor = getInvestorById(investorId);
     if (!investor) return [];
-    
-    const transactions = [
+
+    return [
         {
             date: '2024-03-15',
             type: 'dividend',
@@ -151,8 +188,9 @@ function getTransactionHistory(investorId) {
             description: 'Portfolio appreciation'
         }
     ];
-    return transactions;
 }
 
-// Initialize on load
+// -----------------------------
+// Initialize on Load
+// -----------------------------
 loadData();
