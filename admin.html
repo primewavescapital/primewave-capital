@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="portal-style.css">
+</head>
+<body>
+<h1>Admin Panel</h1>
+<table border="1">
+<thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Initial</th><th>Current</th><th>Profit</th><th>Actions</th></tr></thead>
+<tbody id="tableBody"></tbody>
+</table>
+
+<script src="portal-data.js"></script>
+<script>
+function loadInvestors(){
+  const tbody=document.getElementById('tableBody'); tbody.innerHTML='';
+  getAllInvestors().forEach(inv=>{
+    const profit=calculateProfit(inv);
+    const row=document.createElement('tr');
+    row.innerHTML=`<td>${inv.id}</td><td>${inv.name}</td><td>${inv.email}</td><td>R${inv.initialInvestment}</td><td>R${inv.currentValue}</td><td>${profit>=0?'+':'-'}R${Math.abs(profit)}</td>
+    <td><button onclick="deleteInvestor('${inv.id}'); loadInvestors();">🗑️ Delete</button></td>`;
+    tbody.appendChild(row);
+  });
+}
+loadInvestors();
+</script>
+</body>
+</html>
