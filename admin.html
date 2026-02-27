@@ -3,219 +3,782 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeWave Capital - Admin Panel</title>
-    <link rel="stylesheet" href="portal-style.css">
+    <title>PrimeWave Capital | Admin Control Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f8faff 0%, #f0f5fe 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(circle at 25px 25px, rgba(26, 43, 76, 0.02) 2px, transparent 0);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 20px 40px rgba(0, 20, 60, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .welcome h1 {
+            color: #1e2f4f;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .welcome p {
+            color: #5a6e8a;
+            margin-top: 0.3rem;
+        }
+
+        .admin-profile {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .logout-btn {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.6rem 1.5rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            border: 1px solid #fecaca;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .admin-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #1e2f4f, #2d4373);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: 0 15px 30px rgba(0, 20, 40, 0.06);
+            border: 1px solid rgba(230, 240, 255, 0.8);
+        }
+
+        .stat-label {
+            color: #5f7d9c;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-number {
+            color: #1e2f4f;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 0.3rem;
+        }
+
+        .stat-trend {
+            color: #28a745;
+            font-size: 0.95rem;
+        }
+
+        /* Pending Withdrawals Alert */
+        .withdrawal-alert {
+            background: #fff3cd;
+            border: 1px solid #ffe69c;
+            border-radius: 16px;
+            padding: 1.2rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .alert-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .alert-icon {
+            font-size: 2rem;
+        }
+
+        .alert-text h3 {
+            color: #856404;
+            margin-bottom: 0.2rem;
+        }
+
+        .alert-text p {
+            color: #856404;
+            opacity: 0.9;
+        }
+
+        .review-all-btn {
+            background: #856404;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Main Control Grid */
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Add Investor Card */
+        .add-investor-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(230, 240, 255, 0.8);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header h3 {
+            color: #1e2f4f;
+            font-size: 1.3rem;
+        }
+
+        .badge {
+            background: #eef3fc;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            color: #1e2f4f;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: #5f7d9c;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid #eef3fc;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .form-group input:focus {
+            border-color: #1e2f4f;
+        }
+
+        .add-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #1e2f4f;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+        }
+
+        .add-btn:hover {
+            background: #2d4373;
+        }
+
+        /* Pending Withdrawals Table */
+        .pending-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            border: 1px solid rgba(230, 240, 255, 0.8);
+        }
+
+        .withdrawal-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8fcff;
+            border-radius: 12px;
+            margin-bottom: 0.8rem;
+        }
+
+        .withdrawal-info h4 {
+            color: #1e2f4f;
+            margin-bottom: 0.2rem;
+        }
+
+        .withdrawal-info p {
+            color: #5f7d9c;
+            font-size: 0.85rem;
+        }
+
+        .withdrawal-amount {
+            font-weight: 700;
+            color: #1e2f4f;
+            font-size: 1.1rem;
+        }
+
+        .withdrawal-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .approve-btn {
+            background: #28a745;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .decline-btn {
+            background: #dc3545;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Investors Table */
+        .table-section {
+            background: white;
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(230, 240, 255, 0.8);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .table-header h2 {
+            color: #1e2f4f;
+            font-size: 1.5rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            background: #f8fcff;
+            padding: 0.3rem;
+            border-radius: 40px;
+            border: 1px solid #e0ecf9;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            padding: 0.5rem 1rem;
+            outline: none;
+            width: 250px;
+        }
+
+        .search-box button {
+            background: #1e2f4f;
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 40px;
+            cursor: pointer;
+        }
+
+        .investor-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .investor-table th {
+            text-align: left;
+            padding: 1rem 0.8rem;
+            color: #5f7d9c;
+            font-weight: 500;
+            font-size: 0.85rem;
+            border-bottom: 2px solid #eef3fc;
+        }
+
+        .investor-table td {
+            padding: 1rem 0.8rem;
+            color: #1e2f4f;
+            border-bottom: 1px solid #f0f5fd;
+        }
+
+        .investor-table tr:hover td {
+            background: #f8fcff;
+        }
+
+        .profit {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .edit-input {
+            width: 100px;
+            padding: 0.3rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+        }
+
+        .update-btn {
+            background: #1e2f4f;
+            color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-btn {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            background: #eef3fc;
+            color: #1e2f4f;
+            border: 1px solid #d9e4f0;
+            margin-right: 0.3rem;
+        }
+
+        .action-btn:hover {
+            background: #1e2f4f;
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            color: #5f7d9c;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+        }
+    </style>
 </head>
 <body>
-<div class="admin-container">
-    <!-- Header -->
-    <div class="admin-header">
-        <h1>🔐 PrimeWave Capital Admin</h1>
-        <p>Manage investors, update portfolios, control everything</p>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="welcome">
+                <h1>🔐 Admin Control Panel</h1>
+                <p>Full control over investors • withdrawals • balances</p>
+            </div>
+            <div class="admin-profile">
+                <a href="login.html" class="logout-btn">← Logout</a>
+                <div class="admin-avatar">A</div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Investors</div>
+                <div class="stat-number" id="totalInvestors">124</div>
+                <div class="stat-trend">↑ +12 this month</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total AUM</div>
+                <div class="stat-number" id="totalAUM">R2.84M</div>
+                <div class="stat-trend">↑ +R340k this week</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending Withdrawals</div>
+                <div class="stat-number" id="pendingAmount">R127,500</div>
+                <div class="stat-trend" id="pendingCount">8 requests</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg. Return</div>
+                <div class="stat-number">15.6%</div>
+                <div class="stat-trend">↑ +2.1% vs last month</div>
+            </div>
+        </div>
+
+        <!-- Pending Withdrawals Alert (Dynamic) -->
+        <div class="withdrawal-alert" id="withdrawalAlert">
+            <div class="alert-content">
+                <div class="alert-icon">⏳</div>
+                <div class="alert-text">
+                    <h3 id="alertTitle">8 Pending Withdrawal Requests</h3>
+                    <p id="alertDetails">Total: R127,500 · 3 new today</p>
+                </div>
+            </div>
+            <a href="#" class="review-all-btn" onclick="scrollToWithdrawals()">Review All →</a>
+        </div>
+
+        <!-- Control Grid -->
+        <div class="control-grid">
+            <!-- Add New Investor -->
+            <div class="add-investor-card">
+                <div class="card-header">
+                    <h3>➕ Add New Investor</h3>
+                    <span class="badge">Manual Entry</span>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="newName" placeholder="e.g., John Dube">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="newEmail" placeholder="john@example.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" id="newPhone" placeholder="0821234567">
+                    </div>
+                    <div class="form-group">
+                        <label>Initial Investment</label>
+                        <input type="number" id="newInvestment" placeholder="e.g., 50000">
+                    </div>
+                </div>
+                <button class="add-btn" onclick="addNewInvestor()">Add Investor →</button>
+            </div>
+
+            <!-- Pending Withdrawals Quick View -->
+            <div class="pending-card">
+                <div class="card-header">
+                    <h3>⏳ Pending Withdrawals</h3>
+                    <span class="badge" id="pendingBadge">8 waiting</span>
+                </div>
+                <div id="pendingList">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- All Investors Table -->
+        <div class="table-section">
+            <div class="table-header">
+                <h2>📋 All Investors</h2>
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search by name or ID..." onkeyup="searchInvestors()">
+                    <button>Search</button>
+                </div>
+            </div>
+
+            <table class="investor-table" id="investorTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Initial</th>
+                        <th>Current Balance</th>
+                        <th>Profit</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="investorTableBody">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>PrimeWave Capital © 2025 | 📍 Durban, South Africa | 📞 +27 62 550 3303</p>
+        </div>
     </div>
 
-    <!-- Quick Stats -->
-    <div class="stats-overview" id="statsOverview">
-        <div class="stat-box">
-            <h3>Total Investors</h3>
-            <div class="number" id="totalInvestors">0</div>
-        </div>
-        <div class="stat-box">
-            <h3>Total AUM</h3>
-            <div class="number" id="totalAUM">R0</div>
-        </div>
-        <div class="stat-box">
-            <h3>Avg. Return</h3>
-            <div class="number" id="avgReturn">0%</div>
-        </div>
-    </div>
+    <script>
+        // Sample investors data (in real app, this comes from database)
+        let investors = [
+            { id: 'INV001', name: 'Thabo M.', email: 'thabo.m@example.com', phone: '0821234567', initial: 125000, current: 142800 },
+            { id: 'INV002', name: 'Nomsa K.', email: 'nomsa.k@example.com', phone: '0837654321', initial: 250000, current: 289500 },
+            { id: 'INV003', name: 'David R.', email: 'david.r@example.com', phone: '0849988776', initial: 50000, current: 61200 },
+            { id: 'INV004', name: 'Linda S.', email: 'linda.s@example.com', phone: '0812345678', initial: 750000, current: 825000 },
+            { id: 'INV005', name: 'Sipho Z.', email: 'sipho.z@example.com', phone: '0791234567', initial: 85000, current: 97750 },
+            { id: 'INV006', name: 'Busisiwe P.', email: 'busi.p@example.com', phone: '0789876543', initial: 150000, current: 172500 }
+        ];
 
-    <!-- Admin Controls -->
-    <div class="admin-controls">
-        <h3>➕ Add New Investor</h3>
-        <div class="control-group">
-            <input type="text" id="newName" class="control-input" placeholder="Investor Name">
-            <input type="email" id="newEmail" class="control-input" placeholder="Email">
-            <input type="tel" id="newPhone" class="control-input" placeholder="Phone">
-            <input type="number" id="newAmount" class="control-input" placeholder="Initial Investment (R)">
-            <input type="text" id="newPassword" class="control-input" placeholder="Password">
-            <button class="btn btn-primary" onclick="addNewInvestor()">Add Investor</button>
-        </div>
+        // Pending withdrawals
+        let pendingWithdrawals = [
+            { id: 'WD001', investorId: 'INV003', name: 'David R.', amount: 22000, date: '2025-02-27', reason: 'Education fees' },
+            { id: 'WD002', investorId: 'INV005', name: 'Sipho Z.', amount: 15000, date: '2025-02-27', reason: 'Emergency' },
+            { id: 'WD003', investorId: 'INV002', name: 'Nomsa K.', amount: 45000, date: '2025-02-26', reason: 'Property purchase' },
+            { id: 'WD004', investorId: 'INV001', name: 'Thabo M.', amount: 12500, date: '2025-02-26', reason: 'Car payment' },
+            { id: 'WD005', investorId: 'INV006', name: 'Busisiwe P.', amount: 33000, date: '2025-02-26', reason: 'Business investment' }
+        ];
 
-        <h3>📈 Bulk Updates</h3>
-        <div class="control-group">
-            <input type="number" id="bulkProfit" class="control-input" placeholder="Update all profits by %">
-            <button class="btn btn-warning" onclick="updateAllInvestorProfits()">Update All Profits</button>
-        </div>
-    </div>
+        // Load investors table
+        function loadInvestors() {
+            let tbody = document.getElementById('investorTableBody');
+            tbody.innerHTML = '';
+            
+            investors.forEach(inv => {
+                let profit = inv.current - inv.initial;
+                let profitClass = profit >= 0 ? 'profit' : '';
+                let profitText = profit >= 0 ? `+R${profit.toLocaleString()}` : `-R${Math.abs(profit).toLocaleString()}`;
+                
+                let row = `<tr>
+                    <td><strong>${inv.id}</strong></td>
+                    <td>${inv.name}</td>
+                    <td>${inv.email}</td>
+                    <td>${inv.phone}</td>
+                    <td>R${inv.initial.toLocaleString()}</td>
+                    <td>
+                        <span id="current-${inv.id}">R${inv.current.toLocaleString()}</span>
+                        <input type="number" id="update-${inv.id}" class="edit-input" style="display:none;" value="${inv.current}">
+                    </td>
+                    <td class="${profitClass}">${profitText}</td>
+                    <td>
+                        <button class="action-btn" onclick="editBalance('${inv.id}')" id="edit-${inv.id}">Edit</button>
+                        <button class="action-btn" onclick="saveBalance('${inv.id}')" id="save-${inv.id}" style="display:none;">Save</button>
+                        <button class="action-btn" onclick="cancelEdit('${inv.id}')" id="cancel-${inv.id}" style="display:none;">Cancel</button>
+                        <button class="action-btn" onclick="viewInvestor('${inv.id}')">View</button>
+                    </td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
 
-    <!-- Investors Table -->
-    <div class="table-container">
-        <h3>📋 All Investors</h3>
-        <table id="investorsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Initial (R)</th>
-                    <th>Current (R)</th>
-                    <th>Profit/Loss</th>
-                    <th>Return %</th>
-                    <th>Password</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
-</div>
-
-<!-- Edit Modal -->
-<div class="modal" id="editModal">
-    <div class="modal-content">
-        <h3>Edit Investor</h3>
-        <input type="hidden" id="editId">
-        <input type="text" id="editName" placeholder="Name">
-        <input type="email" id="editEmail" placeholder="Email">
-        <input type="tel" id="editPhone" placeholder="Phone">
-        <input type="number" id="editInitial" placeholder="Initial Investment">
-        <input type="number" id="editCurrent" placeholder="Current Value">
-        <input type="text" id="editPassword" placeholder="Password">
-        <div class="modal-buttons">
-            <button class="btn btn-primary" onclick="saveEdit()">Save</button>
-            <button class="btn btn-danger" onclick="closeModal()">Cancel</button>
-        </div>
-    </div>
-</div>
-
-<script src="portal-data.js"></script>
-<script>
-    // ---------- Load Table ----------
-    function loadInvestors() {
-        const investors = getAllInvestors();
-        const tbody = document.getElementById('tableBody');
-        tbody.innerHTML = '';
-
-        let totalAUM = 0;
-        let totalReturn = 0;
-
-        investors.forEach(inv => {
-            const profit = inv.currentValue - inv.initialInvestment;
-            const returnPct = ((profit / inv.initialInvestment) * 100).toFixed(2);
-            totalAUM += inv.currentValue;
-            totalReturn += parseFloat(returnPct);
-
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${inv.id}</td>
-                <td>${inv.name}</td>
-                <td>${inv.email}</td>
-                <td>${inv.phone}</td>
-                <td>R${inv.initialInvestment.toLocaleString()}</td>
-                <td>R${inv.currentValue.toLocaleString()}</td>
-                <td style="color:${profit>=0?'#10b981':'#ef4444'}">${profit>=0?'+':'-'}R${Math.abs(profit).toLocaleString()}</td>
-                <td style="color:${profit>=0?'#10b981':'#ef4444'}">${profit>=0?'+':''}${returnPct}%</td>
-                <td>${inv.password}</td>
-                <td>
-                    <button class="action-btn edit-btn" onclick="openEditModal('${inv.id}')">Edit</button>
-                    <button class="action-btn delete-btn" onclick="deleteInvestorConfirm('${inv.id}')">Delete</button>
-                </td>
-            `;
-            tbody.appendChild(row);
-        });
-
-        document.getElementById('totalInvestors').textContent = investors.length;
-        document.getElementById('totalAUM').textContent = 'R'+totalAUM.toLocaleString();
-        document.getElementById('avgReturn').textContent = (totalReturn/investors.length).toFixed(2)+'%';
-    }
-
-    // ---------- Add New Investor ----------
-    function addNewInvestor() {
-        const name = document.getElementById('newName').value;
-        const email = document.getElementById('newEmail').value;
-        const phone = document.getElementById('newPhone').value;
-        const amount = parseFloat(document.getElementById('newAmount').value);
-        const password = document.getElementById('newPassword').value;
-
-        if(!name || !email || !phone || !amount){
-            alert('Fill all fields!');
-            return;
+            // Update stats
+            updateStats();
         }
 
-        const inv = addInvestor({name,email,phone,initialInvestment:amount,password});
-        alert(`✅ Investor added!\nID: ${inv.id}\nPassword: ${inv.password}`);
+        // Update statistics
+        function updateStats() {
+            let total = investors.length;
+            let totalAUM = investors.reduce((sum, inv) => sum + inv.current, 0);
+            let pendingTotal = pendingWithdrawals.reduce((sum, wd) => sum + wd.amount, 0);
+            
+            document.getElementById('totalInvestors').innerText = total;
+            document.getElementById('totalAUM').innerText = 'R' + (totalAUM / 1000000).toFixed(2) + 'M';
+            document.getElementById('pendingAmount').innerText = 'R' + pendingTotal.toLocaleString();
+            document.getElementById('pendingCount').innerText = pendingWithdrawals.length + ' requests';
+            document.getElementById('alertTitle').innerText = pendingWithdrawals.length + ' Pending Withdrawal Requests';
+            document.getElementById('alertDetails').innerText = 'Total: R' + pendingTotal.toLocaleString() + ' · ' + getTodayCount() + ' new today';
+            document.getElementById('pendingBadge').innerText = pendingWithdrawals.length + ' waiting';
+            
+            loadPendingWithdrawals();
+        }
 
-        // Clear inputs
-        document.getElementById('newName').value='';
-        document.getElementById('newEmail').value='';
-        document.getElementById('newPhone').value='';
-        document.getElementById('newAmount').value='';
-        document.getElementById('newPassword').value='';
+        // Get today's pending count
+        function getTodayCount() {
+            let today = new Date().toISOString().split('T')[0];
+            return pendingWithdrawals.filter(wd => wd.date === today).length;
+        }
 
-        loadInvestors();
-    }
+        // Load pending withdrawals list
+        function loadPendingWithdrawals() {
+            let list = document.getElementById('pendingList');
+            list.innerHTML = '';
+            
+            pendingWithdrawals.forEach(wd => {
+                let item = `<div class="withdrawal-item">
+                    <div>
+                        <h4>${wd.name}</h4>
+                        <p>${wd.reason} · ${wd.date}</p>
+                    </div>
+                    <div>
+                        <div class="withdrawal-amount">R${wd.amount.toLocaleString()}</div>
+                        <div class="withdrawal-actions">
+                            <button class="approve-btn" onclick="approveWithdrawal('${wd.id}')">✓ Approve</button>
+                            <button class="decline-btn" onclick="declineWithdrawal('${wd.id}')">✗ Decline</button>
+                        </div>
+                    </div>
+                </div>`;
+                list.innerHTML += item;
+            });
+        }
 
-    // ---------- Edit ----------
-    function openEditModal(id){
-        const inv = getInvestorById(id);
-        if(!inv) return;
-        document.getElementById('editId').value = inv.id;
-        document.getElementById('editName').value = inv.name;
-        document.getElementById('editEmail').value = inv.email;
-        document.getElementById('editPhone').value = inv.phone;
-        document.getElementById('editInitial').value = inv.initialInvestment;
-        document.getElementById('editCurrent').value = inv.currentValue;
-        document.getElementById('editPassword').value = inv.password;
+        // Approve withdrawal
+        function approveWithdrawal(id) {
+            let wd = pendingWithdrawals.find(w => w.id === id);
+            if(wd) {
+                // Find investor and deduct balance
+                let investor = investors.find(i => i.id === wd.investorId);
+                if(investor) {
+                    investor.current -= wd.amount;
+                }
+                // Remove from pending
+                pendingWithdrawals = pendingWithdrawals.filter(w => w.id !== id);
+                alert(`✅ Withdrawal for R${wd.amount.toLocaleString()} approved`);
+                loadInvestors();
+            }
+        }
 
-        document.getElementById('editModal').style.display='flex';
-    }
-
-    function saveEdit(){
-        const id = document.getElementById('editId').value;
-        updateInvestor(id,{
-            name: document.getElementById('editName').value,
-            email: document.getElementById('editEmail').value,
-            phone: document.getElementById('editPhone').value,
-            initialInvestment: parseFloat(document.getElementById('editInitial').value),
-            currentValue: parseFloat(document.getElementById('editCurrent').value),
-            password: document.getElementById('editPassword').value
-        });
-        closeModal();
-        loadInvestors();
-        alert('✅ Investor updated!');
-    }
-
-    function closeModal(){
-        document.getElementById('editModal').style.display='none';
-    }
-
-    // ---------- Delete ----------
-    function deleteInvestorConfirm(id){
-        if(confirm('Are you sure?')){
-            deleteInvestor(id);
+        // Decline withdrawal
+        function declineWithdrawal(id) {
+            let wd = pendingWithdrawals.find(w => w.id === id);
+            pendingWithdrawals = pendingWithdrawals.filter(w => w.id !== id);
+            alert(`❌ Withdrawal for R${wd.amount.toLocaleString()} declined`);
             loadInvestors();
         }
-    }
 
-    // ---------- Bulk Profit ----------
-    function updateAllInvestorProfits(){
-        const pct = parseFloat(document.getElementById('bulkProfit').value);
-        if(!pct){ alert('Enter %'); return;}
-        updateAllProfits(pct);
-        document.getElementById('bulkProfit').value='';
+        // Add new investor
+        function addNewInvestor() {
+            let name = document.getElementById('newName').value;
+            let email = document.getElementById('newEmail').value;
+            let phone = document.getElementById('newPhone').value;
+            let investment = parseFloat(document.getElementById('newInvestment').value);
+            
+            if(!name || !email || !phone || !investment) {
+                alert('Please fill all fields');
+                return;
+            }
+            
+            let newId = 'INV' + String(investors.length + 1).padStart(3, '0');
+            
+            investors.push({
+                id: newId,
+                name: name,
+                email: email,
+                phone: phone,
+                initial: investment,
+                current: investment
+            });
+            
+            alert(`✅ Investor ${name} added with ID: ${newId}`);
+            
+            // Clear form
+            document.getElementById('newName').value = '';
+            document.getElementById('newEmail').value = '';
+            document.getElementById('newPhone').value = '';
+            document.getElementById('newInvestment').value = '';
+            
+            loadInvestors();
+        }
+
+        // Edit balance
+        function editBalance(id) {
+            document.getElementById(`current-${id}`).style.display = 'none';
+            document.getElementById(`update-${id}`).style.display = 'inline-block';
+            document.getElementById(`edit-${id}`).style.display = 'none';
+            document.getElementById(`save-${id}`).style.display = 'inline-block';
+            document.getElementById(`cancel-${id}`).style.display = 'inline-block';
+        }
+
+        // Save balance
+        function saveBalance(id) {
+            let newBalance = parseFloat(document.getElementById(`update-${id}`).value);
+            let investor = investors.find(i => i.id === id);
+            
+            if(investor) {
+                investor.current = newBalance;
+                alert(`✅ Balance updated for ${investor.name}`);
+                loadInvestors();
+            }
+        }
+
+        // Cancel edit
+        function cancelEdit(id) {
+            document.getElementById(`current-${id}`).style.display = 'inline-block';
+            document.getElementById(`update-${id}`).style.display = 'none';
+            document.getElementById(`edit-${id}`).style.display = 'inline-block';
+            document.getElementById(`save-${id}`).style.display = 'none';
+            document.getElementById(`cancel-${id}`).style.display = 'none';
+        }
+
+        // View investor details
+        function viewInvestor(id) {
+            let investor = investors.find(i => i.id === id);
+            alert(`📋 ${investor.name}\nID: ${investor.id}\nEmail: ${investor.email}\nPhone: ${investor.phone}\nCurrent Balance: R${investor.current.toLocaleString()}`);
+        }
+
+        // Search investors
+        function searchInvestors() {
+            let search = document.getElementById('searchInput').value.toLowerCase();
+            let rows = document.querySelectorAll('#investorTable tbody tr');
+            
+            rows.forEach(row => {
+                let text = row.textContent.toLowerCase();
+                row.style.display = text.includes(search) ? '' : 'none';
+            });
+        }
+
+        // Scroll to withdrawals
+        function scrollToWithdrawals() {
+            document.querySelector('.pending-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Initialize
         loadInvestors();
-        alert(`✅ All profits updated by ${pct}%`);
-    }
-
-    // Close modal on outside click
-    window.onclick = function(e){
-        if(e.target===document.getElementById('editModal')) closeModal();
-    }
-
-    // Initial load
-    loadInvestors();
-</script>
+    </script>
 </body>
-                      </html>
+    </html>
