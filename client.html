@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Portal</title>
+<link rel="stylesheet" href="portal-style.css">
+</head>
+<body>
+<div class="login-box" id="loginScreen">
+  <h2>🔐 Investor Login</h2>
+  <input type="text" id="investorId" placeholder="Enter ID e.g. INV001">
+  <button onclick="login()">Access Dashboard</button>
+</div>
+
+<div class="client-container" id="dashboardScreen" style="display:none;">
+  <h2>Welcome, <span id="clientName"></span></h2>
+  <p>Total Invested: <span id="totalInvested"></span></p>
+  <p>Current Value: <span id="currentValue"></span></p>
+  <p>Total Profit: <span id="totalProfit"></span></p>
+  <button onclick="logout()">Logout</button>
+</div>
+
+<script src="portal-data.js"></script>
+<script>
+let currentInvestor = null;
+function login(){
+  const id = document.getElementById('investorId').value.trim().toUpperCase();
+  const inv = getInvestorById(id);
+  if(!inv){ alert('ID not found'); return;}
+  currentInvestor=inv;
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('dashboardScreen').style.display='block';
+  document.getElementById('clientName').textContent=inv.name;
+  document.getElementById('totalInvested').textContent='R'+inv.initialInvestment.toLocaleString();
+  document.getElementById('currentValue').textContent='R'+inv.currentValue.toLocaleString();
+  document.getElementById('totalProfit').textContent=(calculateProfit(inv)>=0?'+':'')+'R'+calculateProfit(inv).toLocaleString();
+}
+function logout(){
+  currentInvestor=null;
+  document.getElementById('loginScreen').style.display='block';
+  document.getElementById('dashboardScreen').style.display='none';
+  document.getElementById('investorId').value='';
+}
+</script>
+</body>
+</html>
