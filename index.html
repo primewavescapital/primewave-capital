@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PrimeWave Capital - South African Investment Advisory</title>
+    <title>PrimeWave Capital | Durban-Based Investment Advisory</title>
     <style>
+        /* Add your existing CSS here - keep all your original styling */
         * {
             margin: 0;
             padding: 0;
@@ -12,1554 +13,471 @@
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: #1e293b;
-            background: #f8fafc;
+            color: #333;
         }
         
-        :root {
-            --primary: #0f172a;
-            --secondary: #1e293b;
-            --accent: #3b82f6;
-            --accent-light: #60a5fa;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --gray: #64748b;
-            --border: #e2e8f0;
+        .contact-bar {
+            background: #1a2b4c;
+            color: white;
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 0.95rem;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
         
-        /* Top Contact Bar */
-        .top-bar {
-            background: var(--primary);
-            color: white;
-            padding: 12px 0;
-            border-bottom: 3px solid var(--accent);
-        }
-        
-        .top-bar .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        
-        .contact-info {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-        }
-        
-        .contact-info span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 15px;
-        }
-        
-        .contact-info i {
-            color: var(--accent);
-            font-style: normal;
-            font-weight: bold;
-        }
-        
-        .highlight {
-            background: rgba(59, 130, 246, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--accent);
-            font-weight: 500;
-        }
-        
-        .phone-highlight {
-            background: rgba(16, 185, 129, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
-            border: 1px solid var(--success);
-            font-weight: 500;
-        }
-        
-        /* Navigation */
-        nav {
-            background: white;
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            color: var(--primary);
-            font-size: 28px;
-            font-weight: 700;
-        }
-        
-        .logo span {
-            color: var(--accent);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .nav-links a {
-            color: var(--dark);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        
-        .contact-btn {
-            background: var(--accent);
-            color: white !important;
-            padding: 8px 20px;
-            border-radius: 5px;
-        }
-        
-        .contact-btn:hover {
-            background: var(--accent-light);
-        }
-        
-        /* Hero Section */
         .hero {
-            background: linear-gradient(135deg, var(--primary), #1e3a5f);
+            background: linear-gradient(135deg, #1a2b4c 0%, #2a3f64 100%);
             color: white;
-            padding: 100px 0;
+            padding: 4rem 0;
             text-align: center;
         }
         
         .hero h1 {
-            font-size: 52px;
-            margin-bottom: 20px;
-        }
-        
-        .hero h1 span {
-            color: var(--accent);
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
         }
         
         .hero p {
-            font-size: 18px;
+            font-size: 1.2rem;
             max-width: 800px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 15px 40px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        /* Company Definition */
-        .company-section {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--gray);
-            max-width: 700px;
-            margin: 0 auto 50px;
-        }
-        
-        .definition-box {
-            background: var(--light);
-            padding: 50px;
-            border-radius: 20px;
-            border: 1px solid var(--border);
-            max-width: 900px;
             margin: 0 auto;
-        }
-        
-        .definition-box p {
-            font-size: 18px;
-            line-height: 1.8;
-            color: var(--gray);
-            margin-bottom: 25px;
-        }
-        
-        .definition-box p:last-child {
-            margin-bottom: 0;
-        }
-        
-        .text-highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        
-        /* Vision Mission Goals */
-        .vm-section {
-            padding: 80px 0;
-            background: var(--light);
-        }
-        
-        .vm-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .vm-card {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: transform 0.3s;
-        }
-        
-        .vm-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .vm-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        
-        .vm-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .vm-card p {
-            color: var(--gray);
-            line-height: 1.8;
-        }
-        
-        .goals-list {
-            text-align: left;
-            padding-left: 20px;
-            color: var(--gray);
-        }
-        
-        .goals-list li {
-            margin-bottom: 10px;
-        }
-
-        /* ── PORTFOLIO / SHOWCASE SECTION ── */
-        .portfolio-section {
-            padding: 90px 0;
-            background: white;
-        }
-
-        .portfolio-section .section-title {
-            margin-bottom: 10px;
-        }
-
-        .portfolio-intro {
-            text-align: center;
-            color: var(--gray);
-            max-width: 680px;
-            margin: 0 auto 60px;
-            font-size: 17px;
-        }
-
-        /* Featured hero card */
-        .portfolio-featured {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-            margin-bottom: 40px;
-            background: var(--primary);
-        }
-
-        .portfolio-featured-img {
-            position: relative;
-            min-height: 380px;
-            background: linear-gradient(135deg, #1e3a5f, #0f172a);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .portfolio-featured-img::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80') center/cover no-repeat;
-            opacity: 0.35;
-        }
-
-        .portfolio-featured-img .big-icon {
-            font-size: 90px;
-            position: relative;
-            z-index: 1;
-            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
-        }
-
-        .portfolio-featured-badge {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--accent);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 13px;
-            font-weight: 600;
-            z-index: 2;
-        }
-
-        .portfolio-featured-content {
-            padding: 50px 45px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .portfolio-featured-content h3 {
-            font-size: 30px;
-            font-weight: 700;
-            margin-bottom: 18px;
-            line-height: 1.3;
-        }
-
-        .portfolio-featured-content p {
-            color: rgba(255,255,255,0.75);
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .portfolio-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
-        }
-
-        .tag {
-            background: rgba(59,130,246,0.2);
-            border: 1px solid rgba(59,130,246,0.4);
-            color: var(--accent-light);
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
-        }
-
-        .portfolio-stats {
-            display: flex;
-            gap: 30px;
-        }
-
-        .pstat {
-            text-align: center;
-        }
-
-        .pstat .num {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--gold, #f59e0b);
-        }
-
-        .pstat .label {
-            font-size: 12px;
-            color: rgba(255,255,255,0.55);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        /* Cards grid */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-
-        .portfolio-card {
-            background: var(--light);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 45px rgba(0,0,0,0.1);
-        }
-
-        .portfolio-card-img {
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portfolio-card-img::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: 0.25;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .card-img-1 { background: linear-gradient(135deg, #1e3a5f, #0f172a); }
-        .card-img-1::before { background-image: url('https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=500&q=70'); }
-
-        .card-img-2 { background: linear-gradient(135deg, #064e3b, #022c22); }
-        .card-img-2::before { background-image: url('https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=500&q=70'); }
-
-        .card-img-3 { background: linear-gradient(135deg, #1e1b4b, #0f0d2e); }
-        .card-img-3::before { background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&q=70'); }
-
-        .portfolio-card-img span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .portfolio-card-body {
-            padding: 25px;
-        }
-
-        .portfolio-card-body h4 {
-            font-size: 19px;
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 10px;
-        }
-
-        .portfolio-card-body p {
-            color: var(--gray);
-            font-size: 14px;
-            line-height: 1.7;
-            margin-bottom: 18px;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .card-meta .clients {
-            color: var(--gray);
-        }
-
-        .card-meta .result {
-            background: rgba(16,185,129,0.1);
-            color: var(--success);
-            border: 1px solid rgba(16,185,129,0.3);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: 600;
-        }
-
-        /* Testimonials strip */
-        .testimonials-strip {
-            margin-top: 60px;
-            padding: 50px;
-            background: linear-gradient(135deg, var(--primary), #1e3a5f);
-            border-radius: 20px;
-            color: white;
-        }
-
-        .testimonials-strip h3 {
-            text-align: center;
-            font-size: 26px;
-            margin-bottom: 35px;
             opacity: 0.9;
         }
-
-        .testimonials-grid {
+        
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
+            text-align: center;
         }
-
-        .testimonial-item {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 14px;
-            padding: 28px 24px;
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: #1a2b4c;
+            margin-bottom: 0.5rem;
         }
-
-        .testimonial-item p {
-            font-size: 14px;
-            line-height: 1.75;
-            color: rgba(255,255,255,0.8);
-            margin-bottom: 18px;
-            font-style: italic;
+        
+        .stat-item p {
+            font-size: 1.1rem;
+            color: #666;
         }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .author-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            background: rgba(59,130,246,0.3);
-            border: 2px solid rgba(59,130,246,0.5);
-            flex-shrink: 0;
-        }
-
-        .author-info strong {
+        
+        .stat-item small {
+            color: #28a745;
             display: block;
-            font-size: 14px;
-            color: white;
-        }
-
-        .author-info span {
-            font-size: 12px;
-            color: rgba(255,255,255,0.5);
-        }
-
-        .stars {
-            color: #f59e0b;
-            font-size: 13px;
-            margin-bottom: 10px;
-        }
-
-        /* Core Values */
-        .values {
-            padding: 80px 0;
-            background: white;
+            margin-top: 0.3rem;
         }
         
-        .values-grid {
+        .live-notifications {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .notification {
+            padding: 0.8rem;
+            border-bottom: 1px solid #dee2e6;
+            color: #1a2b4c;
+        }
+        
+        .notification:last-child {
+            border-bottom: none;
+        }
+        
+        .notification .live-badge {
+            background: #dc3545;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.8rem;
+            display: inline-block;
+        }
+        
+        .recent-activity {
+            background: #e9ecef;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .recent-activity marquee {
+            color: #1a2b4c;
+            font-weight: 500;
+            padding: 0.5rem 0;
+        }
+        
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
         }
         
-        .value-item {
-            padding: 30px;
-            background: var(--light);
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
-            transition: transform 0.3s;
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
         }
         
-        .value-item:hover {
-            transform: translateX(10px);
-        }
-        
-        .value-item h4 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .value-item p {
-            color: var(--gray);
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--primary), #1e3a5f);
+        .badge {
+            background: #dc3545;
             color: white;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 1rem;
         }
         
-        .contact-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        
-        .contact-container h2 {
+        .whatsapp-section {
+            background: #25D366;
+            color: white;
+            padding: 3rem;
+            border-radius: 8px;
             text-align: center;
-            font-size: 36px;
-            margin-bottom: 20px;
+            margin: 3rem 0;
         }
         
-        .contact-container > p {
-            text-align: center;
-            font-size: 18px;
-            margin-bottom: 50px;
-            opacity: 0.9;
+        .whatsapp-button {
+            display: inline-block;
+            background: white;
+            color: #25D366;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            font-size: 1.2rem;
         }
         
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 3rem 0;
         }
         
         .contact-card {
-            background: rgba(255,255,255,0.1);
-            padding: 35px 25px;
-            border-radius: 15px;
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 8px;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: transform 0.3s;
-        }
-        
-        .contact-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .contact-card .icon {
-            font-size: 40px;
-            margin-bottom: 15px;
         }
         
         .contact-card h4 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            color: var(--accent);
+            color: #1a2b4c;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
         }
         
-        .contact-card .detail {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            word-break: break-all;
+        .contact-card p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
         }
         
-        .contact-card .note {
-            font-size: 14px;
-            opacity: 0.7;
-        }
-        
-        .email-card {
-            background: rgba(59, 130, 246, 0.2);
-            border: 2px solid var(--accent);
-        }
-        
-        .phone-card {
-            background: rgba(16, 185, 129, 0.2);
-            border: 2px solid var(--success);
-        }
-        
-        .whatsapp-card {
-            background: rgba(37, 211, 102, 0.2);
-            border: 2px solid #25D366;
-        }
-
-        /* WhatsApp Section */
-        .whatsapp-section {
-            padding: 60px 0;
-            background: white;
-        }
-        
-        .whatsapp-container {
-            background: linear-gradient(135deg, #25D366, #128C7E);
+        .contact-card a {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: #1a2b4c;
             color: white;
-            padding: 50px;
-            border-radius: 20px;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .whatsapp-container h3 {
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-        
-        .whatsapp-container p {
-            font-size: 18px;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-        
-        .whatsapp-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            background: white;
-            color: #075E54;
-            padding: 18px 45px;
-            border-radius: 60px;
             text-decoration: none;
-            font-weight: 700;
-            font-size: 20px;
-            margin: 20px 0;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-        
-        .whatsapp-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        .response-time {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .response-time .dot {
-            width: 12px;
-            height: 12px;
-            background: white;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
-            100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
-        }
-        
-        /* Form Section */
-        .form-section {
-            padding: 60px 0;
-            background: var(--light);
-        }
-        
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
-        }
-        
-        .form-container h3 {
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .form-container p {
-            text-align: center;
-            color: var(--gray);
-            margin-bottom: 30px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            cursor: pointer;
+            border-radius: 5px;
             transition: background 0.3s;
         }
         
-        .submit-btn:hover {
-            background: var(--accent-light);
+        .contact-card a:hover {
+            background: #2a3f64;
         }
         
-        /* Footer */
         footer {
-            background: var(--dark);
+            background: #1a2b4c;
             color: white;
-            padding: 60px 0 30px;
-        }
-        
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 50px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links h4 {
-            color: var(--accent);
-            margin-bottom: 20px;
-        }
-        
-        .footer-links p, .footer-links a {
-            color: #94a3b8;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-        }
-        
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-        
-        .disclaimer {
-            background: #1e293b;
-            color: #94a3b8;
-            padding: 20px;
+            padding: 2rem 0;
             text-align: center;
-            font-size: 14px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            margin-top: 3rem;
         }
         
-        .footer-bottom {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid #334155;
-            color: #94a3b8;
-        }
-        
-        /* Floating Buttons */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25D366;
-            color: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            box-shadow: 0 10px 25px rgba(37,211,102,0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 1000;
-            text-decoration: none;
-        }
-        
-        .floating-whatsapp:hover {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .whatsapp-tooltip {
-            position: absolute;
-            right: 80px;
-            background: white;
-            color: #075E54;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .floating-whatsapp:hover .whatsapp-tooltip { opacity: 1; }
-        
-        .floating-call {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background: var(--success);
-            color: white;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 35px;
-            box-shadow: 0 10px 25px rgba(16,185,129,0.4);
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 1000;
-            text-decoration: none;
-        }
-        
-        .floating-call:hover { transform: scale(1.1); }
-
-        .call-tooltip {
-            position: absolute;
-            left: 80px;
-            background: white;
-            color: var(--success);
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        
-        .floating-call:hover .call-tooltip { opacity: 1; }
-        
-        @media (max-width: 768px) {
-            .vm-grid, .contact-grid, .footer-grid,
-            .portfolio-grid, .testimonials-grid { grid-template-columns: 1fr; }
-            .portfolio-featured { grid-template-columns: 1fr; }
-            .portfolio-featured-img { min-height: 220px; }
-            .hero h1 { font-size: 36px; }
-            .testimonials-strip { padding: 30px 20px; }
-        }
-
-        /* ===== FOMO Elements for PrimeWave Capital ===== */
-
-        /* Stats Bar */
-        .fomo-stats-bar {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background: linear-gradient(135deg, #001f3f 0%, #003366 100%);
-            color: white;
-            padding: 2rem 1rem;
-            margin: 2rem 0;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 31, 63, 0.3);
-        }
-
-        .stat-item {
-            text-align: center;
-            min-width: 150px;
-            margin: 1rem;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            display: block;
-            line-height: 1.2;
-            color: #ffd700;
-        }
-
-        .stat-label {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .footer-content p {
+            margin: 0.5rem 0;
             opacity: 0.9;
         }
-
-        /* Activity Ticker */
-        .activity-ticker-container {
-            background: white;
-            border: 2px solid #003366;
-            border-radius: 50px;
-            padding: 0.5rem 2rem;
-            margin: 2rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .ticker-label {
-            background: #ffd700;
-            color: #003366;
-            padding: 0.3rem 1rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: inline-block;
-            margin-right: 1rem;
-        }
-
-        .ticker-content {
-            display: inline-block;
-            color: #333;
-            font-weight: 500;
-        }
-
-        .ticker-item {
-            display: inline-block;
-            margin-right: 2rem;
-        }
-
-        .ticker-item i {
-            color: #ffd700;
-            margin-right: 0.5rem;
-        }
-
-        /* Limited Availability Badges */
-        .service-card {
-            position: relative;
-            overflow: visible;
-        }
-
-        .availability-badge {
-            position: absolute;
-            top: -10px;
-            right: 20px;
-            background: #ff4444;
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
-            z-index: 10;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Timestamped Testimonials */
-        .testimonial-item {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin: 1rem 0;
-            position: relative;
-            border-left: 4px solid #ffd700;
-        }
-
-        .testimonial-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-
-        .testimonial-name {
-            font-weight: 700;
-            color: #003366;
-        }
-
-        .testimonial-time {
-            font-size: 0.8rem;
-            color: #999;
-            background: #f5f5f5;
-            padding: 0.2rem 0.8rem;
-            border-radius: 50px;
-        }
-
-        .testimonial-stars {
-            color: #ffd700;
-            margin-bottom: 0.5rem;
-        }
-
-        .testimonial-text {
-            color: #666;
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* Live Social Proof Pop-ups */
-        .live-popup-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .popup-message {
-            background: white;
-            border-left: 4px solid #ffd700;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            max-width: 300px;
-            animation: slideIn 0.5s ease-out;
-            position: relative;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
             }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        .popup-message i {
-            color: #ffd700;
-            margin-right: 0.5rem;
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            cursor: pointer;
-            color: #999;
-            font-size: 1.2rem;
-        }
-
-        .popup-close:hover {
-            color: #333;
-        }
-
-        /* Count-up Animation */
-        @keyframes countUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
     </style>
-    <link rel="stylesheet" href="fomo.css">
 </head>
 <body>
-    <!-- Live Pop-up Container -->
-    <div class="live-popup-container"></div>
 
-    <!-- Top Contact Bar -->
-    <div class="top-bar">
-        <div class="container">
-            <div class="contact-info">
-                <span><i>📧</i> <span class="highlight">capitalprimewave01@gmail.com</span></span>
-                <span><i>📞</i> <span class="phone-highlight">+1(914)404-3600</span></span>
-                <span><i>📍</i> Johannesburg, South Africa</span>
-            </div>
-            <div>⏰ 24/7 Client Support</div>
+<!-- ======== CONTACT BAR ======== -->
+<div class="contact-bar">
+    📧 capitalprimewave01@gmail.com | 📞 +27 62 550 3303 | 📍 Durban, South Africa | ⏰ 24/7 Client Support
+</div>
+
+<!-- ======== HERO SECTION ======== -->
+<section class="hero">
+    <div class="container">
+        <h1>Your Trusted Partner in<br>KwaZulu-Natal Investments</h1>
+        <p>PrimeWave Capital provides professional investment advisory services from our Durban base to individuals and businesses across South Africa. Our team is dedicated to helping you achieve your financial goals.</p>
+    </div>
+</section>
+
+<!-- ======== STATS SECTION ======== -->
+<div class="container">
+    <div class="stats-grid">
+        <div class="stat-item">
+            <h3>124</h3>
+            <p>Active Investors</p>
+            <small>↑ +12 today</small>
+        </div>
+        
+        <div class="stat-item">
+            <h3>R 2.8M</h3>
+            <p>Rand Managed</p>
+            <small>↑ +R340k this week</small>
+        </div>
+        
+        <div class="stat-item">
+            <h3>18</h3>
+            <p>Joined Today</p>
+            <small>Last: 5 mins ago</small>
+        </div>
+        
+        <div class="stat-item">
+            <h3>R 420k</h3>
+            <p>Withdrawn This Month</p>
+            <small>↓ 8 withdrawals processed</small>
+        </div>
+        
+        <div class="stat-item">
+            <h3>0.2%</h3>
+            <p>Avg. Monthly Return</p>
+            <small>Consistent performance</small>
         </div>
     </div>
+</div>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="container nav-container">
-            <div class="logo">PrimeWave<span> Capital</span></div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#vision">Vision</a>
-                <a href="#portfolio">Portfolio</a>
-                <a href="#contact" class="contact-btn">Contact Us</a>
-            </div>
+<!-- ======== LIVE NOTIFICATIONS ======== -->
+<div class="container">
+    <div class="live-notifications">
+        <h3>🔴 LIVE ACTIVITY</h3>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ Thabo M. just invested R75,000 in Retirement Portfolio
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <h1>Your Trusted Partner in<br><span>South African Investments</span></h1>
-            <p>PrimeWave Capital provides professional investment advisory services to individuals and businesses across South Africa. Our team is dedicated to helping you achieve your financial goals.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn btn-primary">Contact Us</a>
-                <a href="mailto:capitalprimewave01@gmail.com" class="btn btn-outline">📧 Email Us</a>
-                <a href="tel:+19144043600" class="btn btn-success">📞 Call Now</a>
-            </div>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ Linda just invested R50,000 in Premium Advisory
         </div>
-    </section>
-
-    <!-- FOMO Stats Bar -->
-    <div class="fomo-stats-bar">
-        <div class="stat-item">
-            <span class="stat-number" data-target="1247">0</span>
-            <span class="stat-label">Active Investors</span>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ Nkosana P. just withdrew R12,000 (profit taking)
         </div>
-        <div class="stat-item">
-            <span class="stat-number" data-target="24.8">0</span>
-            <span class="stat-label">Million Rand Managed</span>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ Michelle K. just joined with R25,000 Starter Portfolio
         </div>
-        <div class="stat-item">
-            <span class="stat-number" data-target="12">0</span>
-            <span class="stat-label">Joined Today</span>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ Durban Business Forum just invested R150,000
         </div>
-        <div class="stat-item">
-            <span class="stat-number" data-target="8.4">0</span>
-            <span class="stat-label">Avg. Monthly Return %</span>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ Sipho D. just withdrew R8,500 (education fees)
+        </div>
+        
+        <div class="notification">
+            <span class="live-badge">LIVE</span>
+            ⚡ New investor from Ballito just joined
         </div>
     </div>
+</div>
 
-    <!-- Company Definition -->
-    <section class="company-section" id="about">
-        <div class="container">
-            <h2 class="section-title">Who We Are</h2>
-            <p class="section-subtitle">PrimeWave Capital: Building Wealth, Securing Futures</p>
-            <div class="definition-box">
-                <p><span class="text-highlight">PrimeWave Capital</span> is a premier South African investment advisory firm, dedicated to helping individuals and businesses navigate financial markets. Founded on integrity, transparency, and excellence, we provide personalized investment guidance tailored to each client's unique goals.</p>
-                <p>Our team brings together decades of combined experience in local and global financial markets. We understand the unique opportunities and challenges of the South African economic landscape.</p>
-                <p>Whether you're planning for retirement, saving for education, or looking to grow your capital, PrimeWave Capital is your trusted partner on the journey to financial independence.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Vision, Mission, Goals -->
-    <section class="vm-section" id="vision">
-        <div class="container">
-            <h2 class="section-title">Our Vision, Mission & Goals</h2>
-            <p class="section-subtitle">The principles that guide everything we do</p>
-            <div class="vm-grid">
-                <div class="vm-card">
-                    <div class="vm-icon">🔭</div>
-                    <h3>Our Vision</h3>
-                    <p>To become South Africa's most trusted investment advisory firm, empowering individuals to achieve lasting financial freedom.</p>
-                </div>
-                <div class="vm-card">
-                    <div class="vm-icon">🎯</div>
-                    <h3>Our Mission</h3>
-                    <p>To provide accessible, transparent, and personalized investment guidance that helps our clients build and preserve wealth.</p>
-                </div>
-                <div class="vm-card">
-                    <div class="vm-icon">📈</div>
-                    <h3>Our Goals</h3>
-                    <ul class="goals-list">
-                        <li>✅ Serve 10,000+ South African investors</li>
-                        <li>✅ Maintain 95%+ client satisfaction</li>
-                        <li>✅ Expand financial literacy education</li>
-                        <li>✅ Partner with local communities</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Activity Ticker -->
-    <div class="activity-ticker-container">
-        <span class="ticker-label">🔴 LIVE</span>
-        <span class="ticker-content">Loading activity...</span>
+<!-- ======== RECENT ACTIVITY TICKER ======== -->
+<div class="container">
+    <div class="recent-activity">
+        <h4>📈 Recent Activity Feed</h4>
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            ⚡ John D. invested R35,000 • 
+            ⚡ Themba K. withdrew R22,000 • 
+            ⚡ Sarah M. joined with R50,000 • 
+            ⚡ Umhlanga Group invested R120,000 • 
+            ⚡ Peter S. withdrew R15,000 • 
+            ⚡ New investor from Ballito • 
+            ⚡ R45,000 invested in Offshore Portfolio • 
+            ⚡ 3 new withdrawals processed today • 
+            ⚡ R340k net inflow this week
+        </marquee>
     </div>
+</div>
 
-    <!-- ══════════════════════════════════════
-         PORTFOLIO / INVESTMENT ADVISORY SHOWCASE
-    ══════════════════════════════════════ -->
-    <section class="portfolio-section" id="portfolio">
-        <div class="container">
-            <h2 class="section-title">Our Advisory Services</h2>
-            <p class="portfolio-intro">Explore the range of investment advisory solutions we offer to help South Africans grow and protect their wealth.</p>
+<!-- ======== WHO WE ARE ======== -->
+<div class="container">
+    <h2>Who We Are</h2>
+    <p>PrimeWave Capital: Building Wealth, Securing Futures</p>
+    <p>PrimeWave Capital is a premier Durban-based investment advisory firm, dedicated to helping individuals and businesses navigate financial markets. Founded on integrity, transparency, and excellence, we provide personalized investment guidance tailored to each client's unique goals.</p>
+    <p>Our team brings together decades of combined experience in local and global financial markets. We understand the unique opportunities and challenges of the KwaZulu-Natal economic landscape.</p>
+    <p>Whether you're planning for retirement, saving for education, or looking to grow your capital, PrimeWave Capital is your trusted partner on the journey to financial independence.</p>
+</div>
 
-            <!-- Featured Service -->
-            <div class="portfolio-featured">
-                <div class="portfolio-featured-img">
-                    <span class="portfolio-featured-badge">⭐ Flagship Service</span>
-                    <span class="big-icon">📊</span>
-                </div>
-                <div class="portfolio-featured-content">
-                    <h3>Personalised Investment Portfolio Advisory</h3>
-                    <p>Our core offering — a fully tailored investment strategy built around your financial goals, risk tolerance, and timeline. We analyse local and global markets to construct portfolios that work for you.</p>
-                    <div class="portfolio-tags">
-                        <span class="tag">JSE Equities</span>
-                        <span class="tag">ETFs</span>
-                        <span class="tag">Fixed Income</span>
-                        <span class="tag">Global Exposure</span>
-                        <span class="tag">Risk Management</span>
-                    </div>
-                    <div class="portfolio-stats">
-                        <div class="pstat">
-                            <div class="num">500+</div>
-                            <div class="label">Clients Advised</div>
-                        </div>
-                        <div class="pstat">
-                            <div class="num">12+</div>
-                            <div class="label">Years Experience</div>
-                        </div>
-                        <div class="pstat">
-                            <div class="num">95%</div>
-                            <div class="label">Satisfaction Rate</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 3 Service Cards -->
-            <div class="portfolio-grid">
-                <div class="portfolio-card service-card">
-                    <div class="availability-badge">🔥 Only 3 spots left</div>
-                    <div class="portfolio-card-img card-img-1">
-                        <span>🏦</span>
-                    </div>
-                    <div class="portfolio-card-body">
-                        <h4>Retirement Planning</h4>
-                        <p>Strategic guidance on RAs, pension funds, and living annuities to ensure a comfortable, financially secure retirement.</p>
-                        <div class="card-meta">
-                            <span class="clients">👥 Individual & Families</span>
-                            <span class="result">Long-term Growth</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-card service-card">
-                    <div class="availability-badge">🔥 Only 5 spots left</div>
-                    <div class="portfolio-card-img card-img-2">
-                        <span>🌍</span>
-                    </div>
-                    <div class="portfolio-card-body">
-                        <h4>Offshore & Global Investing</h4>
-                        <p>Diversify beyond South Africa's borders. We guide clients into USD-denominated assets and international markets.</p>
-                        <div class="card-meta">
-                            <span class="clients">👥 High Net Worth</span>
-                            <span class="result">Diversification</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-card service-card">
-                    <div class="availability-badge">🔥 Only 2 spots left</div>
-                    <div class="portfolio-card-img card-img-3">
-                        <span>📉</span>
-                    </div>
-                    <div class="portfolio-card-body">
-                        <h4>Risk & Wealth Protection</h4>
-                        <p>Identify and mitigate financial risks with structured protection strategies including insurance-linked investments.</p>
-                        <div class="card-meta">
-                            <span class="clients">👥 Business & Personal</span>
-                            <span class="result">Capital Preservation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Testimonials Strip -->
-            <div class="testimonials-strip">
-                <h3>💬 What Our Clients Say</h3>
-                <div class="testimonials-grid">
-                    <div class="testimonial-item">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">Sipho M.</span>
-                            <span class="testimonial-time">Joined 2 days ago</span>
-                        </div>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-text">"PrimeWave Capital helped me understand where to put my money. Their advice was clear, honest, and results-oriented."</p>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">Nomsa K.</span>
-                            <span class="testimonial-time">Joined last week</span>
-                        </div>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-text">"I finally feel confident about my retirement plan. The team at PrimeWave walked me through every step of the process."</p>
-                    </div>
-                    <div class="testimonial-item">
-                        <div class="testimonial-header">
-                            <span class="testimonial-name">David R.</span>
-                            <span class="testimonial-time">Joined 3 days ago</span>
-                        </div>
-                        <div class="testimonial-stars">★★★★★</div>
-                        <p class="testimonial-text">"Their offshore investment guidance opened up a whole new world for my portfolio. Truly professional and trustworthy."</p>
-                    </div>
-                </div>
-            </div>
-
+<!-- ======== VISION, MISSION & GOALS ======== -->
+<div class="container">
+    <h2>Our Vision, Mission & Goals</h2>
+    <p>The principles that guide everything we do</p>
+    
+    <div class="services-grid">
+        <div class="service-card">
+            <h3>🔭 Our Vision</h3>
+            <p>To become KwaZulu-Natal's most trusted investment advisory firm, empowering individuals to achieve lasting financial freedom.</p>
         </div>
-    </section>
-
-    <!-- WhatsApp Section -->
-    <section class="whatsapp-section">
-        <div class="container">
-            <div class="whatsapp-container">
-                <h3>💬 Chat with Us on WhatsApp</h3>
-                <p>Get instant answers to your investment questions. Our team is online 24/7.</p>
-                <a href="https://wa.me/19144043600?text=Hello%20PrimeWave%20Capital%2C%20I'm%20interested%20in%20learning%20more%20about%20your%20investment%20services." 
-                   target="_blank" class="whatsapp-button">
-                    <span>💬</span>
-                    <span>Message us on WhatsApp</span>
-                    <span style="font-size:15px;opacity:0.7;margin-left:5px;">+1(914)404-3600</span>
-                </a>
-                <div class="response-time">
-                    <span class="dot"></span>
-                    <span>Typically replies within 5 minutes</span>
-                </div>
-            </div>
+        
+        <div class="service-card">
+            <h3>🎯 Our Mission</h3>
+            <p>To provide accessible, transparent, and personalized investment guidance that helps our clients build and preserve wealth.</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section" id="contact">
-        <div class="container contact-container">
-            <h2>Get in Touch With Our Team</h2>
-            <p>Have questions? Need advice? Our team is here 24/7.</p>
-            <div class="contact-grid">
-                <div class="contact-card email-card">
-                    <div class="icon">📧</div>
-                    <h4>Email Us</h4>
-                    <div class="detail">capitalprimewave01@gmail.com</div>
-                    <a href="mailto:capitalprimewave01@gmail.com" style="color:white;">Send Email →</a>
-                </div>
-                <div class="contact-card phone-card">
-                    <div class="icon">📞</div>
-                    <h4>Call Us</h4>
-                    <div class="detail">+1(914)404-3600</div>
-                    <a href="tel:+19144043600" style="color:white;">Call Now →</a>
-                </div>
-                <div class="contact-card whatsapp-card">
-                    <div class="icon">💬</div>
-                    <h4>WhatsApp</h4>
-                    <div class="detail">+1(914)404-3600</div>
-                    <a href="https://wa.me/19144043600" target="_blank" style="color:white;">WhatsApp Us →</a>
-                </div>
-            </div>
+        
+        <div class="service-card">
+            <h3>📈 Our Goals</h3>
+            <ul>
+                <li>✅ Serve 10,000+ South African investors</li>
+                <li>✅ Maintain 95%+ client satisfaction</li>
+                <li>✅ Expand financial literacy education</li>
+                <li>✅ Partner with local communities</li>
+            </ul>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- Contact Form -->
-    <section class="form-section">
-        <div class="container">
-            <div class="form-container">
-                <h3>Send Us a Message</h3>
-                <p>We'll respond within 24 hours</p>
-                <form name="contact" method="POST" data-netlify="true">
-                    <input type="hidden" name="form-name" value="contact">
-                    <div class="form-group">
-                        <input type="text" name="name" placeholder="Your Full Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" name="email" placeholder="Your Email Address" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" name="phone" placeholder="Your Phone Number">
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="How can we help you?" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
+<!-- ======== SERVICES ======== -->
+<div class="container">
+    <h2>Our Advisory Services</h2>
+    <p>Explore the range of investment advisory solutions we offer to help South Africans grow and protect their wealth.</p>
+    
+    <div class="services-grid">
+        <div class="service-card">
+            <span class="badge">⭐ Flagship Service</span>
+            <h3>Personalised Investment Portfolio Advisory</h3>
+            <p>Our core offering — a fully tailored investment strategy built around your financial goals, risk tolerance, and timeline. We analyse local and global markets to construct portfolios that work for you.</p>
+            <p><strong>500+</strong> Clients Advised</p>
+            <p><strong>12+</strong> Years Experience</p>
+            <p><strong>95%</strong> Satisfaction Rate</p>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-logo">PrimeWave<span style="color:var(--accent);"> Capital</span></div>
-                    <p style="color:#94a3b8;">Building wealth, securing futures.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Contact</h4>
-                    <p>📧 capitalprimewave01@gmail.com</p>
-                    <p>📞 +1(914)404-3600</p>
-                    <p>📍 Johannesburg, SA</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#vision">Vision</a>
-                    <a href="#portfolio">Portfolio</a>
-                </div>
-                <div class="footer-links">
-                    <h4>Support</h4>
-                    <p>24/7 WhatsApp</p>
-                    <p>Email: 1 hour reply</p>
-                </div>
-            </div>
-            <div class="disclaimer">
-                <strong>Disclaimer:</strong> PrimeWave Capital is a registered financial services provider. This website is for informational purposes only.
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 PrimeWave Capital. All rights reserved.</p>
-            </div>
+        
+        <div class="service-card">
+            <span class="badge">🔥 Only 4 spots left</span>
+            <h3>🏦 Retirement Planning</h3>
+            <p>Strategic guidance on RAs, pension funds, and living annuities to ensure a comfortable, financially secure retirement.</p>
         </div>
-    </footer>
+        
+        <div class="service-card">
+            <span class="badge">🔥 Only 4 spots left</span>
+            <h3>🌍 Offshore & Global Investing</h3>
+            <p>Diversify beyond South Africa's borders. We guide clients into USD-denominated assets and international markets.</p>
+        </div>
+        
+        <div class="service-card">
+            <span class="badge">🔥 Only 5 spots left</span>
+            <h3>📉 Risk & Wealth Protection</h3>
+            <p>Identify and mitigate financial risks with structured protection strategies including insurance-linked investments.</p>
+        </div>
+    </div>
+</div>
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/19144043600?text=Hello%20PrimeWave%20Capital%2C%20I'm%20interested%20in%20your%20services." 
-       target="_blank" class="floating-whatsapp">
-        <span class="whatsapp-tooltip">Chat with us</span>
-        💬
-    </a>
+<!-- ======== TESTIMONIALS ======== -->
+<div class="container">
+    <h2>💬 What Our Clients Say</h2>
+    
+    <div class="services-grid">
+        <div class="service-card">
+            <p>★★★★★</p>
+            <p>"PrimeWave Capital helped me understand where to put my money. Their advice was clear, honest, and results-oriented."</p>
+            <p><strong>- Sipho M.</strong> Joined 2 days ago</p>
+        </div>
+        
+        <div class="service-card">
+            <p>★★★★★</p>
+            <p>"I finally feel confident about my retirement plan. The team at PrimeWave walked me through every step of the process."</p>
+            <p><strong>- Nomsa K.</strong> Joined last week</p>
+        </div>
+        
+        <div class="service-card">
+            <p>★★★★★</p>
+            <p>"Their offshore investment guidance opened up a whole new world for my portfolio. Truly professional and trustworthy."</p>
+            <p><strong>- David R.</strong> Joined just now</p>
+        </div>
+    </div>
+</div>
 
-    <!-- Floating Call -->
-    <a href="tel:+19144043600" class="floating-call">
-        <span class="call-tooltip">Call us now</span>
-        📞
-    </a>
+<!-- ======== WHATSAPP SECTION ======== -->
+<div class="container">
+    <div class="whatsapp-section">
+        <h2>💬 Chat with Us on WhatsApp</h2>
+        <p>Get instant answers to your investment questions. Our Durban-based team is online during business hours.</p>
+        <a href="https://wa.me/27625503303" class="whatsapp-button">💬 Message us on WhatsApp +27 62 550 3303</a>
+        <p>Typically replies within 1 hour</p>
+    </div>
+</div>
 
-    <script src="fomo.js"></script>
+<!-- ======== CONTACT SECTION ======== -->
+<div class="container">
+    <h2>Get in Touch With Our Team</h2>
+    <p>Have questions? Need advice? Our team is here 24/7.</p>
+    
+    <div class="contact-grid">
+        <div class="contact-card">
+            <h4>📧 Email Us</h4>
+            <p>capitalprimewave01@gmail.com</p>
+            <a href="mailto:capitalprimewave01@gmail.com">Send Email →</a>
+        </div>
+        
+        <div class="contact-card">
+            <h4>📞 Call Us</h4>
+            <p>+27 62 550 3303</p>
+            <a href="tel:+27625503303">Call Now →</a>
+        </div>
+        
+        <div class="contact-card">
+            <h4>💬 WhatsApp Us</h4>
+            <p>+27 62 550 3303</p>
+            <a href="https://wa.me/27625503303">WhatsApp Now →</a>
+        </div>
+    </div>
+</div>
+
+<!-- ======== FOOTER ======== -->
+<footer>
+    <div class="container footer-content">
+        <p>© 2024 PrimeWave Capital. All rights reserved.</p>
+        <p>📍 Durban, South Africa | 📞 +27 62 550 3303 | 📧 capitalprimewave01@gmail.com</p>
+        <p>Authorised Financial Services Provider (FSP No: [your number])</p>
+    </div>
+</footer>
+
 </body>
     </html>
